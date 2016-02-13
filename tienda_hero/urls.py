@@ -16,7 +16,15 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+
+from apps.main import urls as main_urls
+
 urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^', include(main_urls,
+                      namespace='main',
+                      app_name='main'
+                      )
+        ),
 ]

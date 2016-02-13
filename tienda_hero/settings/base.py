@@ -34,6 +34,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
+    'apps.main',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -75,7 +76,7 @@ WSGI_APPLICATION = 'tienda_hero.wsgi.application'
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'es-pe'
+LANGUAGE_CODE = 'es-PE'
 
 TIME_ZONE = 'America/Lima'
 
@@ -93,4 +94,4 @@ STATIC_URL = '/static/'
 
 
 # Grappelli admin title
-GRAPPELLI_ADMIN_TITLE = 'tienda_hero'
+GRAPPELLI_ADMIN_TITLE = 'Hero Denim'

@@ -2,9 +2,31 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>{{ app_name }} index page</title>
+    <title>Hero Denim Experience</title>
   </head>
   <body>
-    <h1>{{ app_name }} index page</h1>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#">Denim</a></li>
+          <li><a href="#">Prendas</a></li>
+          <li><a href="#">Niños</a></li>
+          <li>BUSCADOR</li>
+        </ul>
+      </nav>
+      <img src="" alt="Logo Hero Denim" />
+    </header>
+    <h2>HOMBRE</h2>
+    <ol>
+      {% for categoria in hombre %}
+      <li>{{ categoria }}</li>
+      {% endfor %}
+    </ol>
+    <h2>NIÑO</h2>
+    <ol>
+      {% for categoria in niño %}
+      <li>{{ categoria }}</li>
+      {% endfor %}
+    </ol>
   </body>
 </html>
