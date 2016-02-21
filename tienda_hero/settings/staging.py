@@ -22,3 +22,9 @@ DATABASES = {
         'NAME': BASE_DIR.child('db.sqlite3'),
     }
 }
+
+# Pipeline configuration
+PIPELINE = {
+    'PIPELINE_ENABLED': not DEBUG
+}
+

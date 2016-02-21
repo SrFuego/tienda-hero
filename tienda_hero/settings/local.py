@@ -18,7 +18,6 @@ THIRD_PARTY_APPS_LOCAL = (
 
 INSTALLED_APPS += THIRD_PARTY_APPS_LOCAL
 
-
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
@@ -28,3 +27,9 @@ DATABASES = {
         'NAME': BASE_DIR.child('db.sqlite3'),
     }
 }
+
+# Pipeline configuration
+PIPELINE = {
+    'PIPELINE_ENABLED': not DEBUG
+}
+
