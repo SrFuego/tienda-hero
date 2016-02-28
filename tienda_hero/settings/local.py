@@ -10,10 +10,11 @@ SECRET_KEY = '3k37ir3&11a2of5d(ro6p)=bau9pgsq(@+p#b#ci7pbehm0au*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 THIRD_PARTY_APPS_LOCAL = (
     'debug_toolbar',
+    'django_extensions',
 )
 
 INSTALLED_APPS += THIRD_PARTY_APPS_LOCAL
@@ -30,6 +31,5 @@ DATABASES = {
 
 # Pipeline configuration
 PIPELINE = {
-    'PIPELINE_ENABLED': not DEBUG
+    'PIPELINE_ENABLED': True
 }
-

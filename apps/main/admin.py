@@ -11,6 +11,7 @@ from django.contrib import admin
 # Local imports
 from .models import (
     Category,
+    Clothes,
 )
 
 
@@ -22,3 +23,12 @@ class CategoryAdmin(admin.ModelAdmin):
         'gender',
     )
     ordering = ('name', 'gender',)
+
+
+@admin.register(Clothes)
+class ClothesAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'slug',
+        'photo_thumbnail',
+    )

@@ -27,4 +27,3 @@ DATABASES = {
 PIPELINE = {
     'PIPELINE_ENABLED': not DEBUG
 }
-

@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hero Denim Experience</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#">Denim</a></li>
+          <li><a href="#">Prendas</a></li>
+          <li><a href="#">Niños</a></li>
+          <li>BUSCADOR</li>
+        </ul>
+      </nav>
+      <img src="" alt="Logo Hero Denim" />
+    </header>
+    <h2>Prendas</h2>
+      <p>Nombre de la prenda: {{ object.name }}</p>
+      <p>Descripción: {{ object.description }}</p>
+      <p>Marca: {{ object.brand }}</p>
+      {% if object.offert_price %}
+        <p>Precio de oferta: {{ object.offert_price }}</p>
+        <strike>Precio normal: {{ object.price }}</strike>
+      {% else %}
+        <p>Precio: {{ object.price }}</p>
+      {% endif %}
+      <p>Imagen: <img src="{% get_media_prefix %}{{ object.photo.large }}" alt="" /><p>
+      <p>Cantidad: {{ object.stock }}</p>
+  </body>
+</html>

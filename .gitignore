@@ -3,3 +3,5 @@
 **/migrations/
 **/resources/
 **.swp
+.python-version
+**/media/

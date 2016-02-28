@@ -2,26 +2,26 @@
 
 
 # Django imports
-from django.shortcuts import render
-from django.views.generic import View
+from django.views.generic import DetailView, ListView
 
 
 # Third party apps imports
 
 
 # Local imports
-from .models import Category
+from .models import Clothes
 
 
 # Create your views here.
-class IndexView(View):
-    def get(self, request, *args, **kwargs):
-        template = 'main/index.html'
+class Index(ListView):
+    context_object_name = 'prendas'
+    model = Clothes
+    paginate_by = 3
+    template_name = 'main/index.html'
 
-        hombre_category = Category.objects.filter(gender='HOMBRE')
-        niño_category = Category.objects.filter(gender='NIÑO')
-        context = {
-            'hombre': hombre_category,
-            'niño': niño_category
-        }
-        return render(request, template, context)
+
+class Clothes(DetailView):
+    model = Clothes
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+    template_name = 'main/detail.html'

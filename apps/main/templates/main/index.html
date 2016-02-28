@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,17 +17,32 @@
       </nav>
       <img src="" alt="Logo Hero Denim" />
     </header>
-    <h2>HOMBRE</h2>
-    <ol>
-      {% for categoria in hombre %}
-      <li>{{ categoria }}</li>
-      {% endfor %}
-    </ol>
-    <h2>NIÑO</h2>
-    <ol>
-      {% for categoria in niño %}
-      <li>{{ categoria }}</li>
-      {% endfor %}
-    </ol>
+    <h2>Prendas</h2>
+    {% for prenda in prendas %}
+      <p>Nombre de la prenda: {{ prenda.name }}</p>
+      <p>Descripción: {{ prenda.description }}</p>
+      <p>Marca: {{ prenda.brand }}</p>
+      {% if prenda.offert_price %}
+        <strike>Precio normal: {{ prenda.price }}</strike>
+        <p>Precio de oferta: {{ prenda.offert_price }}</p>
+      {% else %}
+        <p>Precio: {{ prenda.price }}</p>
+      {% endif %}
+      <p>Imagen: <img src="{% get_media_prefix %}{{ prenda.photo.large }}" alt="" /><p>
+      <p>Cantidad: {{ prenda.stock }}</p>
+      <a href="{% url 'main:detail' prenda.slug %}">Ver detalle</a>
+    {% endfor %}
+
+    {% if is_paginated %}
+      <ul>
+        {% for page in page_obj.paginator.page_range %}
+          {% ifequal page_obj.number page  %}
+            <li><span>{{ page }}</span></li>
+          {% else %}
+            <li><span><a href="?page={{ page }}">{{ page }}</a></span></li>
+          {% endifequal %}
+        {% endfor %}
+      </ul>
+    {% endif %}
   </body>
 </html>

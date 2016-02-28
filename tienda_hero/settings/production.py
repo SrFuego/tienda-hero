@@ -26,4 +26,3 @@ DATABASES = {
 PIPELINE = {
     'PIPELINE_ENABLED': True
 }
-

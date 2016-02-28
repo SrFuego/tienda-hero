@@ -1,4 +1,5 @@
 Django==1.8.9
 django-grappelli==2.7.3
-django-pipeline==1.6.5
+django-pipeline==1.6.6
+django-stdimage==2.3.2
 Unipath==1.1
