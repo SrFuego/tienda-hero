@@ -1,56 +1,55 @@
+{% extends "main/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Hero Denim Experience</title>
-  </head>
-  <body>
-    <header>
-      <nav>
-        <ul>
-          <li><a href="#">Denim</a></li>
-          <li><a href="#">Prendas</a></li>
-          <li><a href="#">Niños</a></li>
-          <li>BUSCADOR</li>
-        </ul>
-      </nav>
-      <img src="" alt="Logo Hero Denim" />
-    </header>
-    <h2>Prendas</h2>
-    {% for prenda in prendas %}
-      <p>Nombre de la prenda: {{ prenda.name }}</p>
-      <p>Descripción: {{ prenda.description }}</p>
-      <p>Marca: {{ prenda.brand }}</p>
-      {% if prenda.offert_price %}
-        <strike>Precio normal: {{ prenda.price }}</strike>
-        <p>Precio de oferta: {{ prenda.offert_price }}</p>
-      {% else %}
-        <p>Precio: {{ prenda.price }}</p>
-      {% endif %}
-      {% for x in prenda.photo.all %}
-        <p>Imagen: <img src="{% get_media_prefix %}{{ x.img.large }}" alt="" /><p>
-      {% endfor %}
-      <p>Cantidad: {{ prenda.stock }}</p>
-      <a href="{% url 'main:detail' prenda.slug %}">Ver detalle</a>
-    {% endfor %}
 
-    {% if is_paginated %}
-      <ul>
-        {% if page_obj.has_previous %}
-          <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+
+
+{% block title %}Inicio{% endblock %}
+
+
+
+{% block content %}
+<section>
+  <div class="producto">
+    <h2>Prendas</h2>
+    {% for cloth in clothes %}
+      <div class="producto-texto text-center">
+        <p class="producto-nombre">{{ cloth.name }}</p>
+        <p>Descripción: {{ cloth.description }}</p>
+        <p>Marca: {{ cloth.brand }}</p>
+        {% if cloth.offer_price %}
+          <strike><p class="producto-precio">Precio normal: {{ cloth.price }}</p></strike>
+          <p class="producto-precio">Precio de oferta: {{ cloth.offet_price }}</p>
+        {% else %}
+          <p class="producto-precio">{{ cloth.price }}</p>
         {% endif %}
-        {% for page in page_obj.paginator.page_range %}
-          {% ifequal page_obj.number page  %}
-            <li><span>{{ page }}</span></li>
-          {% else %}
-            <li><span><a href="?page={{ page }}">{{ page }}</a></span></li>
-          {% endifequal %}
-        {% endfor %}
-        {% if page_obj.has_next %}
-          <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
-        {% endif %}
-      </ul>
-    {% endif %}
-  </body>
-</html>
+        <span class="typcn typcn-shopping-cart" style="font-size: 4em;"></span>
+      </div>
+      {% for image in cloth.images.all %}
+        <div class="producto-imagen">
+          <img src="{% get_media_prefix %}{{ image.img.large }}" alt="{{ image.img.name }}" />
+        </div>
+      {% endfor %}
+      <p>Cantidad: {{ cloth.stock }}</p>
+      <a href="{% url 'main:detail' cloth.slug %}">Ver detalle</a>
+    {% endfor %}
+  </div>
+
+  {% if is_paginated %}
+    <ul>
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+      {% endif %}
+      {% for page in page_obj.paginator.page_range %}
+        {% ifequal page_obj.number page  %}
+          <li><span>{{ page }}</span></li>
+        {% else %}
+          <li><span><a href="?page={{ page }}">{{ page }}</a></span></li>
+        {% endifequal %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+      {% endif %}
+    </ul>
+  {% endif %}
+</section>
+{% endblock %}

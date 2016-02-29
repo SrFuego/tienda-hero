@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <title>Hero Denim Experience | {% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+      <ul class="text-center">
+        <li>DENIM</li>
+        <li>NIÑOS</li>
+      </ul>
+      <img src="{% static 'main//img/logo.png' %}" alt="Logo Hero Denim" />
+    </header>
+    {% block content %}{% endblock %}
+     <br>
+    <footer>
+      Todos los derechos reservados
+    </footer>
+    <script src="{% static 'main/js/jquery.min.js' %}"></script>
+    <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>
+

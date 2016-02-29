@@ -9,12 +9,12 @@ from django.conf.urls import url
 
 
 # Local imports
-from .views import Clothes, Index
+from .views import Cloth, Index
 
 # Create your tests here.
 
 
 urlpatterns = [
     url(r'^$', Index.as_view(), name='index'),
-    url(r'^detail/(?P<slug>[\w-]+)$', Clothes.as_view(), name='detail'),
+    url(r'^detail/(?P<slug>[\w-]+)$', Cloth.as_view(), name='detail'),
 ]

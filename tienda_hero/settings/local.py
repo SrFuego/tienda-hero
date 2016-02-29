@@ -33,5 +33,5 @@ DATABASES = {
 
 # Pipeline configuration
 PIPELINE = {
-    'PIPELINE_ENABLED': True
+    'PIPELINE_ENABLED': False
 }
