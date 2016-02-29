@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
+
 GENDER_CHOICES = (
-    ('NIÑO', 'NIÑO'),
+    (u'NIÑO', u'NIÑO'),
     ('HOMBRE', 'HOMBRE'),
 )

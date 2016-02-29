@@ -28,13 +28,18 @@
       {% else %}
         <p>Precio: {{ prenda.price }}</p>
       {% endif %}
-      <p>Imagen: <img src="{% get_media_prefix %}{{ prenda.photo.large }}" alt="" /><p>
+      {% for x in prenda.photo.all %}
+        <p>Imagen: <img src="{% get_media_prefix %}{{ x.img.large }}" alt="" /><p>
+      {% endfor %}
       <p>Cantidad: {{ prenda.stock }}</p>
       <a href="{% url 'main:detail' prenda.slug %}">Ver detalle</a>
     {% endfor %}
 
     {% if is_paginated %}
       <ul>
+        {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+        {% endif %}
         {% for page in page_obj.paginator.page_range %}
           {% ifequal page_obj.number page  %}
             <li><span>{{ page }}</span></li>
@@ -42,6 +47,9 @@
             <li><span><a href="?page={{ page }}">{{ page }}</a></span></li>
           {% endifequal %}
         {% endfor %}
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+        {% endif %}
       </ul>
     {% endif %}
   </body>

@@ -1,7 +1,20 @@
+# base de datos para pruebas en local
 **.sqlite3
-**/__pycache__/
+
+# archivos compilados de python
+*.pyc
+
+# archivo de configuracion del proyecto
+.env
+
+# migraciones
 **/migrations/
-**/resources/
+
+# archivos temporables creados por vim mientras un archivo esta abierto
 **.swp
+
+# archivo creado por pyenv para setear el entorno virtual del proyecto
 .python-version
+
+# carpeta media
 **/media/

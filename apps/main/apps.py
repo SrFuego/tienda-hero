@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Python imports
 
 
@@ -13,4 +14,4 @@ from django.apps import AppConfig
 
 class MainConfig(AppConfig):
     name = 'apps.main'
-    verbose_name = 'Aplicación Principal'
+    verbose_name = u'Aplicación Principal'

@@ -16,7 +16,7 @@ from .models import Clothes
 class Index(ListView):
     context_object_name = 'prendas'
     model = Clothes
-    paginate_by = 3
+    paginate_by = 1
     template_name = 'main/index.html'
 
 
