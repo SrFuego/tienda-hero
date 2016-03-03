@@ -35,3 +35,9 @@ DATABASES = {
 PIPELINE = {
     'PIPELINE_ENABLED': False
 }
+
+# django-extensions graph configuration
+GRAPH_MODELS = {
+    'all_applications': True,
+    'group_models': True,
+}

@@ -4,6 +4,7 @@ django-debug-toolbar
 django-extensions
 pip-tools
 pipdeptree
+pygraphviz
 Werkzeug
 yolk
 ipython

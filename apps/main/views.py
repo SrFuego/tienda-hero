@@ -17,6 +17,7 @@ class Index(ListView):
     context_object_name = 'clothes'
     model = Cloth
     paginate_by = 1
+    queryset = Cloth.objects.national()
     template_name = 'main/index.html'
 
 

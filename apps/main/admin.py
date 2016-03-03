@@ -25,13 +25,13 @@ from .models import (
 class BrandAdmin(admin.ModelAdmin):
     fields = (
         'name',
-        'nationality',
+        'national',
     )
     list_display = (
         'name',
-        'nationality',
+        'national',
     )
-    list_filter = ('nationality', )
+    list_filter = ('national', )
     ordering = ('name', )
     search_fields = ('name', )
 

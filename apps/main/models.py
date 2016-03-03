@@ -4,6 +4,7 @@
 
 # Django imports
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.template.defaultfilters import slugify
 
@@ -17,22 +18,16 @@ from .choices import (
     GENDER_CHOICES,
 )
 
+from .managers import (
+    ClothesQuerySet,
+)
+
 
 # Create your models here.
 class Brand(models.Model):
 
-    """
-    Marcas de las prendas
-    """
-
-    name = models.CharField(
-        max_length=20,
-        unique=True,
-        verbose_name='Nombre'
-    )
-    nationality = models.BooleanField(
-        verbose_name='Marca nacional'
-    )
+    name = models.CharField(max_length=20, unique=True, verbose_name='Nombre')
+    national = models.BooleanField(default=True, verbose_name='Marca nacional')
 
     class Meta:
         verbose_name = 'Marca'
@@ -44,19 +39,10 @@ class Brand(models.Model):
 
 class Category(models.Model):
 
-    """
-    Categoría de las prendas (Jeans, Polos, Camisas, Blusas, etc)
-    """
-
     gender = models.CharField(
-        max_length=6,
-        choices=GENDER_CHOICES,
-        verbose_name=u'Género'
-    )
+        choices=GENDER_CHOICES, max_length=1, verbose_name=u'Género')
     name = models.CharField(
-        max_length=50,
-        verbose_name=u'Nombre de la Categoría'
-    )
+        max_length=50, verbose_name=u'Nombre de la Categoría')
 
     class Meta:
         verbose_name = u'Categoría'
@@ -73,20 +59,11 @@ def image_path(obj, filename):
 
 class Image(models.Model):
 
-    """
-    Imágenes de las prendas
-    """
-
     img = StdImageField(
         upload_to=image_path,
         variations={'large': (350, 350), 'thumbnail': (75, 75)},
-        verbose_name='Imagen'
-    )
-    name = models.CharField(
-        max_length=30,
-        unique=True,
-        verbose_name='Nombre'
-    )
+        verbose_name='Imagen')
+    name = models.CharField(max_length=30, unique=True, verbose_name='Nombre')
 
     class Meta:
         verbose_name = 'Imagen'
@@ -99,20 +76,13 @@ class Image(models.Model):
         return u'<img src="{}{}" alt="{}">'.format(
             settings.MEDIA_URL, self.img.thumbnail, self.name
         )
+
     img_thumbnail.allow_tags = True
 
 
 class Size(models.Model):
 
-    """
-    Tallas para las prendas
-    """
-
-    name = models.CharField(
-        max_length=20,
-        unique=True,
-        verbose_name='Talla'
-    )
+    name = models.CharField(max_length=20, unique=True, verbose_name='Talla')
 
     class Meta:
         verbose_name = 'Talla'
@@ -124,51 +94,24 @@ class Size(models.Model):
 
 class Cloth(models.Model):
 
-    """
-    Prendas
-    """
-
-    available = models.BooleanField(
-        default=True,
-        verbose_name='Disponible'
-    )
+    available = models.BooleanField(default=True, verbose_name='Disponible')
     brand = models.ForeignKey(
-        Brand,
-        on_delete=models.CASCADE,
-        verbose_name='Marca'
-    )
+        Brand, on_delete=models.CASCADE, verbose_name='Marca')
     category = models.ForeignKey(
-        Category,
-        on_delete=models.CASCADE,
-        verbose_name=u'Categoría'
-    )
-    description = models.TextField(
-        blank=True,
-        verbose_name=u'Descripción'
-    )
-    name = models.CharField(
-        max_length=50,
-        unique=True,
-        verbose_name='Nombre'
-    )
-    offer_price = models.PositiveSmallIntegerField(
-        blank=True,
-        null=True,
-        verbose_name='Precio de oferta (opcional)'
-    )
+        Category, on_delete=models.CASCADE, verbose_name=u'Categoría')
+    description = models.TextField(blank=True, verbose_name=u'Descripción')
     images = models.ManyToManyField(
-        Image,
-        verbose_name=u'Imágenes de la prenda'
-    )
+        Image, verbose_name=u'Imágenes de la prenda')
+    name = models.CharField(max_length=50, unique=True, verbose_name='Nombre')
+    offer_price = models.PositiveSmallIntegerField(
+        blank=True, null=True, verbose_name='Precio de oferta (opcional)')
     price = models.PositiveSmallIntegerField(verbose_name='Precio')
     slug = models.SlugField(editable=False, max_length=50)
-    size = models.ManyToManyField(
-        Size,
-        verbose_name='Talla'
-    )
+    size = models.ManyToManyField(Size, verbose_name='Talla')
     stock = models.PositiveSmallIntegerField(
-        verbose_name='Cantidad disponible'
-    )
+        verbose_name='Cantidad disponible')
+
+    objects = ClothesQuerySet.as_manager()
 
     class Meta:
         verbose_name = 'Prenda'
@@ -176,6 +119,12 @@ class Cloth(models.Model):
 
     def __unicode__(self):
         return u'{}'.format(self.name)
+
+    def clean(self):
+        if self.offer_price >= self.price:
+            raise ValidationError({
+                'offer_price': [
+                    'El precio de oferta debe ser menor al precio', ]})
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
