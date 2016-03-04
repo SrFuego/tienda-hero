@@ -24,5 +24,8 @@ class ClothesQuerySet(models.QuerySet):
     def national(self):
         return self.available().filter(brand__national=True)
 
+    def international(self):
+        return self.available().filter(brand__national=False)
+
     def size(self, size):
         return self.available().filter(size__name=size)

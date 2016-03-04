@@ -9,12 +9,31 @@ from django.conf.urls import url
 
 
 # Local imports
-from .views import Cloth, Index
+from .views import (
+    ClothDetailView, IndexListView, NationalListView, InternationalListView, )
 
 # Create your tests here.
 
 
 urlpatterns = [
-    url(r'^$', Index.as_view(), name='index'),
-    url(r'^detail/(?P<slug>[\w-]+)$', Cloth.as_view(), name='detail'),
+    url(
+        r'^national/$',
+        NationalListView.as_view(),
+        name='national'
+    ),
+    url(
+        r'^international/$',
+        InternationalListView.as_view(),
+        name='international'
+    ),
+    url(
+        r'^$',
+        IndexListView.as_view(),
+        name='index'
+    ),
+    url(
+        r'^detail/(?P<slug>[\w-]+)$',
+        ClothDetailView.as_view(),
+        name='detail'
+    ),
 ]

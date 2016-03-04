@@ -12,13 +12,13 @@
 <p>Descripción: {{ cloth.description }}</p>
 <p>Marca: {{ cloth.brand }}</p>
 {% if cloth.offer_price %}
-  <p>Precio de oferta: {{ cloth.offer_price }}</p>
-  <strike>Precio normal: {{ cloth.price }}</strike>
+    <p>Precio de oferta: {{ cloth.offer_price }}</p>
+    <strike>Precio normal: {{ cloth.price }}</strike>
 {% else %}
-  <p>Precio: {{ cloth.price }}</p>
+    <p>Precio: {{ cloth.price }}</p>
 {% endif %}
 {% for image in cloth.images.all %}
-<p>Imagen: <img src="{% get_media_prefix %}{{ image.img.large }}" alt="{{ image.img.name }}" /><p>
+    <p>Imagen: <img src="{% get_media_prefix %}{{ image.img.large }}" alt="{{ image.img.name }}" /><p>
 {% endfor %}
 <p>Cantidad: {{ cloth.stock }}</p>
 <button onclick="window.history.back()">Atrás</button>

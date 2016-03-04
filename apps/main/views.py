@@ -13,17 +13,25 @@ from .models import Cloth
 
 
 # Create your views here.
-class Index(ListView):
+class IndexListView(ListView):
     context_object_name = 'clothes'
     model = Cloth
     paginate_by = 1
-    queryset = Cloth.objects.national()
+    queryset = Cloth.objects.available()
     template_name = 'main/index.html'
 
 
-class Cloth(DetailView):
+class NationalListView(IndexListView):
+    queryset = Cloth.objects.national()
+    template_name = 'main/national.html'
+
+
+class InternationalListView(IndexListView):
+    queryset = Cloth.objects.international()
+    template_name = 'main/international.html'
+
+
+class ClothDetailView(DetailView):
     context_object_name = 'cloth'
     model = Cloth
-    slug_field = 'slug'
-    slug_url_kwarg = 'slug'
     template_name = 'main/detail.html'
