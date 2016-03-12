@@ -1,0 +1,55 @@
+{% extends 'clothes/base.html' %}
+
+
+
+{% block title %}Inicio{% endblock %}
+
+
+
+{% block navbar %}
+{% include "main/partials/_navbar.html" with active_link="main:index" %}
+{% endblock navbar %}
+
+
+
+{% block content %}
+<h2>Prendas</h2>
+{% for cloth in clothes %}
+    <p>{{ cloth.name }}</p>
+    <p>Descripción: {{ cloth.description }}</p>
+    <p>Marca: {{ cloth.brand }}</p>
+    {% if cloth.offer_price %}
+        <strike><p>Precio normal: {{ cloth.price }}</p></strike>
+        <p>Precio de oferta: {{ cloth.offet_price }}</p>
+    {% else %}
+        <p>{{ cloth.price }}</p>
+    {% endif %}
+    {% for image in cloth.images.all %}
+        <img src="{% get_media_prefix %}{{ image.img.large }}" alt="{{ image.img.name }}" />
+    {% endfor %}
+    {% ifequal cloth.stock 0  %}
+      <p>Cantidad: Actualmente sin stock</p>
+    {% else %}
+      <p>Cantidad: {{ cloth.stock }}</p>
+    {% endifequal %}
+    <a href="{% url 'main:detail' cloth.slug %}">Ver detalle</a>
+{% endfor %}
+
+{% if is_paginated %}
+    <ul>
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+        {% endif %}
+        {% for page in page_obj.paginator.page_range %}
+            {% ifequal page_obj.number page  %}
+                <li><span>{{ page }}</span></li>
+            {% else %}
+                <li><span><a href="?page={{ page }}">{{ page }}</a></span></li>
+            {% endifequal %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+        {% endif %}
+    </ul>
+{% endif %}
+{% endblock content %}

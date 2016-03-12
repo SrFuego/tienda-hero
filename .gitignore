@@ -3,21 +3,16 @@
 
 # archivos compilados de python
 *.pyc
+**/__pycache__/
 
 # archivo de configuracion del proyecto
 .env
 
-# migraciones
-**/migrations/
-
-# archivos temporables creados por vim mientras un archivo esta abierto
+# archivos temporales creados por vim mientras un archivo esta abierto
 **.swp
 
-# archivo creado por pyenv para setear el entorno virtual del proyecto
+# archivo creado por pyenv para definir el virtualenv del proyecto
 .python-version
 
 # carpeta media
 **/media/
-
-# requierements compilados con pip-tools
-requirements.txt

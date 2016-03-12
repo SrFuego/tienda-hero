@@ -1,6 +1,11 @@
+django < 1.10
+django-crispy-forms
 django-dotenv
+django-filter
+django-filter
 django-grappelli
 django-pipeline
 django-stdimage
-Django > 1.8, < 1.9
+djangorestframework
+markdown
 Unipath

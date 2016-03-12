@@ -19,7 +19,9 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 
-from apps.main import urls as main_urls
+from clothes import urls as clothes_urls
+from api.urls import router as api_router
+
 
 urlpatterns = [
     url(
@@ -31,11 +33,21 @@ urlpatterns = [
         include(admin.site.urls)
     ),
     url(
-        r'^',
+        r'^clothes/',
         include(
-            main_urls,
-            namespace='main',
-            app_name='main'
+            clothes_urls,
+            namespace='clothes'
         )
     ),
+    url(
+        r'^',
+        include(api_router.urls)
+    ),
+    url(
+        r'^api-auth/',
+        include(
+            'rest_framework.urls',
+            namespace='rest_framework'
+        )
+    )
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
