@@ -19,8 +19,10 @@ from .choices import (
 )
 
 from .managers import (
+    BrandQuerySet,
+    CategoryQuerySet,
     ClothesQuerySet,
-    BrandQuerySet
+    SizeQuerySet,
 )
 
 
@@ -46,6 +48,8 @@ class Category(models.Model):
         choices=GENDER_CHOICES, max_length=1, verbose_name=u'Género')
     name = models.CharField(
         max_length=50, verbose_name=u'Nombre de la Categoría')
+
+    objects = CategoryQuerySet.as_manager()
 
     class Meta:
         verbose_name = u'Categoría'
@@ -86,6 +90,8 @@ class Image(models.Model):
 class Size(models.Model):
 
     name = models.CharField(max_length=20, unique=True, verbose_name='Talla')
+
+    objects = SizeQuerySet.as_manager()
 
     class Meta:
         verbose_name = 'Talla'

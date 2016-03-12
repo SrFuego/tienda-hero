@@ -2,7 +2,6 @@ django < 1.10
 django-crispy-forms
 django-dotenv
 django-filter
-django-filter
 django-grappelli
 django-pipeline
 django-stdimage

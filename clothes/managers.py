@@ -3,8 +3,8 @@
 
 
 # Django imports
-from django.db import models
 from django.apps import apps
+from django.db import models
 
 
 # Third party apps imports
@@ -23,10 +23,28 @@ class BrandQuerySet(models.QuerySet):
                 'brand', flat=True).distinct())
 
     def nationals(self):
-        return self.availables.filter(national=True)
+        return self.availables().filter(national=True)
 
     def internationals(self):
-        return self.availables.filter(national=False)
+        return self.availables().filter(national=False)
+
+
+class CategoryQuerySet(models.QuerySet):
+
+    def availables(self):
+        Cloth = apps.get_model('clothes', 'Cloth')
+        return self.filter(
+            id__in=Cloth.objects.availables().values_list(
+                'category', flat=True).distinct())
+
+
+class SizeQuerySet(models.QuerySet):
+
+    def availables(self):
+        Cloth = apps.get_model('clothes', 'Cloth')
+        return self.filter(
+            id__in=Cloth.objects.availables().values_list(
+                'size', flat=True).distinct())
 
 
 class ClothesQuerySet(models.QuerySet):

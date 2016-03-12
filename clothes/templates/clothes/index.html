@@ -1,5 +1,5 @@
 {% extends 'clothes/base.html' %}
-
+{% load static %}
 
 
 {% block title %}Inicio{% endblock %}
@@ -7,7 +7,7 @@
 
 
 {% block navbar %}
-{% include "main/partials/_navbar.html" with active_link="main:index" %}
+{% include 'clothes/partials/_navbar.html' with active_link='clothes:index' %}
 {% endblock navbar %}
 
 
@@ -20,7 +20,7 @@
     <p>Marca: {{ cloth.brand }}</p>
     {% if cloth.offer_price %}
         <strike><p>Precio normal: {{ cloth.price }}</p></strike>
-        <p>Precio de oferta: {{ cloth.offet_price }}</p>
+        <p>Precio de oferta: {{ cloth.offer_price }}</p>
     {% else %}
         <p>{{ cloth.price }}</p>
     {% endif %}
@@ -32,7 +32,7 @@
     {% else %}
       <p>Cantidad: {{ cloth.stock }}</p>
     {% endifequal %}
-    <a href="{% url 'main:detail' cloth.slug %}">Ver detalle</a>
+    <a href="{% url 'clothes:detail' cloth.slug %}">Ver detalle</a>
 {% endfor %}
 
 {% if is_paginated %}
