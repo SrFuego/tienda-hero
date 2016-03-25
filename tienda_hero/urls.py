@@ -42,5 +42,9 @@ urlpatterns = [
     url(
         r'^api/',
         include(api_router.urls)
+    ),
+    url(
+        r'^docs/',
+        include('rest_framework_swagger.urls')
     )
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,10 +1,12 @@
 django < 1.10
+django-cors-headers
 django-crispy-forms
 django-dotenv
 django-filter
 django-grappelli
 django-pipeline
+django-rest-swagger
 django-stdimage
 djangorestframework
 markdown
-Unipath
+unipath

@@ -7,7 +7,8 @@ import dotenv
 if __name__ == "__main__":
     dotenv.read_dotenv()
 
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tienda_hero.settings")
+    os.environ.setdefault(
+        "DJANGO_SETTINGS_MODULE", "tienda_hero.settings.staging")
 
     from django.core.management import execute_from_command_line
 
